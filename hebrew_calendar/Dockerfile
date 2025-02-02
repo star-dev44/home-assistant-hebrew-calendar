@@ -4,7 +4,7 @@ FROM $BUILD_FROM
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
-# Install required system packages and dependencies
+# Install only essential dependencies first
 RUN apk update && apk add --no-cache \
     python3 \
     py3-pip \
@@ -15,10 +15,7 @@ RUN apk update && apk add --no-cache \
     musl-dev \
     gcc \
     python3-dev \
-    openssl-dev \
-    libmagic-dev \
-    libxml2-dev \
-    libxslt-dev
+    openssl-dev
 
 # Upgrade pip and install Python packages
 RUN python3 -m ensurepip --upgrade \
@@ -26,10 +23,7 @@ RUN python3 -m ensurepip --upgrade \
     && pip3 install --no-cache-dir wheel setuptools \
     && pip3 install --no-cache-dir hdate flask
 
-RUN pip3 install --no-cache-dir --upgrade pip && \
-    pip3 install --no-cache-dir -v hdate flask
-
-# Copy files into the container
+# Copy your custom scripts into the container
 COPY run.sh /run.sh
 COPY hebrew_calendar.py /hebrew_calendar.py
 COPY ui_override.js /ui_override.js
@@ -37,5 +31,5 @@ COPY ui_override.js /ui_override.js
 # Make the script executable
 RUN chmod +x /run.sh
 
-# Set entrypoint
+# Set the entrypoint to run the script
 CMD [ "/run.sh" ]
