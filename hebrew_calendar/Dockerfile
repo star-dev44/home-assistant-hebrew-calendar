@@ -14,10 +14,13 @@ RUN apk update && apk add --no-cache \
     libffi-dev \
     musl-dev \
     gcc \
-    python3-dev
+    python3-dev \
+    openssl-dev
 
 # Upgrade pip and install Python packages
-RUN pip3 install --no-cache-dir --upgrade pip \
+RUN python3 -m ensurepip --upgrade \
+    && pip3 install --no-cache-dir --upgrade pip \
+    && pip3 install --no-cache-dir wheel setuptools \
     && pip3 install --no-cache-dir hdate flask
 
 # Copy files into the container
