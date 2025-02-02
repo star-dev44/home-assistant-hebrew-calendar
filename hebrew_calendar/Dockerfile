@@ -26,6 +26,9 @@ RUN python3 -m ensurepip --upgrade \
     && pip3 install --no-cache-dir wheel setuptools \
     && pip3 install --no-cache-dir hdate flask
 
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir -v hdate flask
+
 # Copy files into the container
 COPY run.sh /run.sh
 COPY hebrew_calendar.py /hebrew_calendar.py
