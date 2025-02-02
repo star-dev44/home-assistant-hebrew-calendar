@@ -4,18 +4,20 @@ FROM $BUILD_FROM
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
-# Install only essential dependencies first
+# Install basic dependencies first
 RUN apk update && apk add --no-cache \
     python3 \
     py3-pip \
-    bash \
-    curl \
-    build-base \
-    libffi-dev \
-    musl-dev \
-    gcc \
-    python3-dev \
-    openssl-dev
+    bash
+
+# Install build dependencies one by one to isolate the issue
+RUN apk add --no-cache curl
+RUN apk add --no-cache build-base
+RUN apk add --no-cache libffi-dev
+RUN apk add --no-cache musl-dev
+RUN apk add --no-cache gcc
+RUN apk add --no-cache python3-dev
+RUN apk add --no-cache openssl-dev
 
 # Upgrade pip and install Python packages
 RUN python3 -m ensurepip --upgrade \
@@ -31,5 +33,5 @@ COPY ui_override.js /ui_override.js
 # Make the script executable
 RUN chmod +x /run.sh
 
-# Set the entrypoint to run the script
+# Set entrypoint to run the script
 CMD [ "/run.sh" ]
