@@ -4,7 +4,7 @@ FROM $BUILD_FROM
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
-# Install required system packages
+# Install required system packages and dependencies
 RUN apk update && apk add --no-cache \
     python3 \
     py3-pip \
@@ -15,7 +15,10 @@ RUN apk update && apk add --no-cache \
     musl-dev \
     gcc \
     python3-dev \
-    openssl-dev
+    openssl-dev \
+    libmagic-dev \
+    libxml2-dev \
+    libxslt-dev
 
 # Upgrade pip and install Python packages
 RUN python3 -m ensurepip --upgrade \
