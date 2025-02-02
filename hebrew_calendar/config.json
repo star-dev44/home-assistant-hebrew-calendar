@@ -8,5 +8,11 @@
   "boot": "auto",
   "options": {},
   "schema": {},
-  "image": "local/hebrew-calendar-addon"
+  "build_from": {
+    "amd64": "ghcr.io/hassio-addons/base/amd64:latest",
+    "armhf": "ghcr.io/hassio-addons/base/armhf:latest",
+    "armv7": "ghcr.io/hassio-addons/base/armv7:latest",
+    "aarch64": "ghcr.io/hassio-addons/base/aarch64:latest",
+    "i386": "ghcr.io/hassio-addons/base/i386:latest"
+  }
 }
