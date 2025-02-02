@@ -1,0 +1,12 @@
+{
+  "name": "Hebrew Calendar Override",
+  "version": "1.0.0",
+  "slug": "hebrew_calendar",
+  "description": "Replaces all calendars with Hebrew dates",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "startup": "application",
+  "boot": "auto",
+  "options": {},
+  "schema": {},
+  "image": "local/hebrew-calendar-addon"
+}
