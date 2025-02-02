@@ -4,9 +4,20 @@ FROM $BUILD_FROM
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
-# Install required packages
-RUN apk add --no-cache python3 py3-pip bash curl \
-    && pip3 install --no-cache-dir --upgrade pip \
+# Install required system packages
+RUN apk update && apk add --no-cache \
+    python3 \
+    py3-pip \
+    bash \
+    curl \
+    build-base \
+    libffi-dev \
+    musl-dev \
+    gcc \
+    python3-dev
+
+# Upgrade pip and install Python packages
+RUN pip3 install --no-cache-dir --upgrade pip \
     && pip3 install --no-cache-dir hdate flask
 
 # Copy files into the container
