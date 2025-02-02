@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:latest
+ARG BUILD_FROM=alpine:3.18
 FROM $BUILD_FROM
 
 # Set environment variables
